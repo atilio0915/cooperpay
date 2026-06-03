@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/25.0.2"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cooperpay.controller.PagamentosFxController"
+      spacing="12"
+      prefWidth="1200"
+      prefHeight="600"
+      style="-fx-padding: 20;">
+
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 8 0;">
+        <Button text="Home" onAction="#voltarHome" />
+        <Button text="Pagamentos" />
+        <Button text="Sair" onAction="#sair" />
+    </HBox>
+
+    <Label text="Pagamentos Feitos"
+           style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <TextField fx:id="txtPesquisaMotoboy" promptText="Pesquisar pagamento por motoboy..." prefWidth="360" />
+        <TextField fx:id="txtDataPagamento" promptText="Data (yyyy-MM-dd)" prefWidth="160" />
+        <Button text="Filtrar por data" onAction="#filtrarPorData" />
+        <Button text="Limpar data" onAction="#limparData" />
+    </HBox>
+
+    <TableView fx:id="tabelaPagamentos" prefHeight="500" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="colMotoboy" text="Motoboy" prefWidth="180" />
+            <TableColumn fx:id="colPix" text="Pix" prefWidth="180" />
+            <TableColumn fx:id="colValor" text="Valor" prefWidth="90" />
+            <TableColumn fx:id="colStatus" text="Status" prefWidth="110" />
+            <TableColumn fx:id="colTrabalhou" text="Trabalhou?" prefWidth="100" />
+            <TableColumn fx:id="colSemana" text="Semana" prefWidth="120" />
+            <TableColumn fx:id="colTxid" text="Txid" prefWidth="220" />
+        </columns>
+    </TableView>
+
+    <Label fx:id="lblMensagem" style="-fx-text-fill: #444;" />
+
+</VBox>

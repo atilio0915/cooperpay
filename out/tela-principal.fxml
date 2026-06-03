@@ -1,0 +1,4 @@
+<VBox xmlns:fx="http://javafx.com/fxml" alignment="CENTER" spacing="10">
+    <Label text="Sistema de Pagamentos"/>
+    <Button text="Entrar"/>
+</VBox>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/25.0.2"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="cooperpay.controller.HomeFxController"
+      spacing="12"
+      prefWidth="1200"
+      prefHeight="600"
+      style="-fx-padding: 20;">
+
+    <HBox spacing="10" alignment="CENTER_LEFT" style="-fx-padding: 0 0 8 0;">
+        <Button text="Editar Motoboy" onAction="#abrirEditarMotoboy" />
+        <Button text="Pagamentos" onAction="#abrirPagamentos" />
+        <Button text="Lojas" onAction="#abrirLojas" />
+        <Button text="Sair" onAction="#sair" />
+    </HBox>
+
+    <HBox spacing="20"
+          alignment="TOP_LEFT"
+          fillHeight="true">
+
+        <!-- LADO ESQUERDO - MOTOBOYS -->
+        <VBox spacing="10" prefWidth="420" alignment="TOP_LEFT">
+            <Label text="Todos os Motoboys"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+            <TextField fx:id="txtPesquisaMotoboy" promptText="Pesquisar motoboy..." />
+
+            <TableView fx:id="tabelaMotoboys" prefHeight="460" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colTrabalhou" text="Trabalhou?" prefWidth="120" />
+                    <TableColumn fx:id="colNome" text="Nome" prefWidth="280" />
+                </columns>
+            </TableView>
+
+            <HBox visible="false" managed="false" prefHeight="36" />
+        </VBox>
+
+        <!-- LADO DIREITO - PAGAMENTOS -->
+        <VBox spacing="10" prefWidth="740" alignment="TOP_LEFT" HBox.hgrow="ALWAYS">
+            <Label text="Pagamentos da Semana (Rascunho)"
+                   style="-fx-font-size: 16px; -fx-font-weight: bold;" />
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <TextField fx:id="txtPesquisaDireita" promptText="Pesquisar pagamento..." prefWidth="360" />
+                <MenuButton fx:id="menuImportarLojaRascunho" text="Importar loja" />
+            </HBox>
+
+            <TableView fx:id="tabelaPagamentosRascunho" prefHeight="460" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colMotoboyDireita" text="Motoboy" prefWidth="120" />
+                    <TableColumn fx:id="colPixDireita" text="Pix" prefWidth="120" />
+                    <TableColumn fx:id="colValorDireita" text="Valor" prefWidth="70" />
+                    <TableColumn fx:id="colStatusDireita" text="Status" prefWidth="85" />
+                    <TableColumn fx:id="colSalvoDireita" text="Salvo" prefWidth="70" />
+                    <TableColumn fx:id="colTrabalhouDireita" text="Trabalhou?" prefWidth="85" />
+                    <TableColumn fx:id="colSemanaDireita" text="Semana" prefWidth="95" />
+                    <TableColumn fx:id="colTxidDireita" text="Txid" prefWidth="95" />
+                    <TableColumn fx:id="colPagarDireita" text="Pagar" prefWidth="70" />
+                    <TableColumn fx:id="colRemoverDireita" text="Remover" prefWidth="80" />
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT" prefHeight="36">
+                <Label text="Total da semana: R$ 0,00"
+                       style="-fx-font-weight: bold;" />
+            </HBox>
+        </VBox>
+
+    </HBox>
+
+</VBox>

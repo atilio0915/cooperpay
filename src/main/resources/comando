@@ -1,0 +1,29 @@
+.\run.ps1
+ 
+  pra compilar fxml
+
+  cpay
+
+http://localhost:8080/h2-console
+.\mvnw.cmd spring-boot:run
+ 
+
+ngrok http 8080 --authtoken 3Ds9TwsFOIBtAwwR1fm9TM8PRZY_GDTKMS111LBRhMDZ2QE
+ngrok http 8080
+
+compilar para .exe usando .jpackage
+
+ C:\MeuSistema\
+│
+├── MeuSistema.exe
+├── config\application.properties
+├── data\banco.mv.db
+└── logs\ isso é oq ?
+
+É um modelo válido para app “portable”, mas em instalador Windows profissional normalmente fica separado:
+
+binários em Program Files
+dados em %APPDATA% ou %LOCALAPPDATA%
+logs em pasta de dados também.
+
+$aact_hmlg_000MzkwODA2MWY2OGM3MWRlMDU2NWM3MzJlNzZmNGZhZGY6OmI0NDA5NTUxLTJmYmUtNDY3NC1hYjlkLWQ5NjJmMDViMmI1Yzo6JGFhY2hfNThkNjkyMmMtYzkyYi00MDExLWI0NDEtMGJhYjRmODA4NjIz
