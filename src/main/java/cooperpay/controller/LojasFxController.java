@@ -28,7 +28,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class LojasFxController {
 
     private final LojaApiClient lojaApiClient = new LojaApiClient();
@@ -36,6 +40,9 @@ public class LojasFxController {
     private final ObservableList<MotoboyItem> motoboys = FXCollections.observableArrayList();
     private final FilteredList<MotoboyItem> motoboysFiltrados = new FilteredList<>(motoboys, item -> true);
     private List<LojaItem> lojasDisponiveis = new ArrayList<>();
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     private Long lojaSelecionadaId;
     private String nomeLojaSelecionada;
@@ -153,7 +160,9 @@ public class LojasFxController {
 
     @FXML
     private void voltarHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home.fxml"));
+        loader.setControllerFactory(applicationContext::getBean);
+        Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root, 1200, 600));
         stage.show();

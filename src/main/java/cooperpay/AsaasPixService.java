@@ -105,8 +105,7 @@ public class AsaasPixService implements PixInterface {
                 .onStatus(HttpStatusCode::isError, clientResponse ->
                     clientResponse.bodyToMono(String.class).flatMap(errorBody -> {
                         if (clientResponse.statusCode().value() == 403) {
-                            log.error("[Asaas] ACESSO NEGADO (403). O IP atual ({}) precisa estar na Whitelist do painel Asaas.", 
-                                "177.39.126.187");
+                            log.error("[Asaas] ACESSO NEGADO (403). Verifique se o seu IP atual está na Whitelist do painel Asaas.");
                         }
                         log.error("[Asaas] ERRO HTTP {}. Resposta do Servidor: {}", clientResponse.statusCode(), errorBody);
                         return reactor.core.publisher.Mono.error(new RuntimeException("Erro na API Asaas: " + clientResponse.statusCode()));

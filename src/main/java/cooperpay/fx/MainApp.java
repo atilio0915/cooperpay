@@ -19,14 +19,22 @@ public class MainApp extends Application {
 
     @Override
     public void init() throws Exception {
-        // Inicia o Spring Boot em segundo plano antes da interface abrir
-        springContext = new SpringApplicationBuilder(MainApp.class).run();
+        try {
+            // Inicia o Spring Boot em segundo plano antes da interface abrir
+            springContext = new SpringApplicationBuilder(MainApp.class).run();
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Em caso de erro crítico na inicialização, imprime o erro e espera para que o usuário possa ler no console
+            Thread.sleep(5000); 
+            Platform.exit(); // Encerra a aplicação JavaFX
+        }
     }
 
     @Override
     public void start(Stage stage) throws Exception {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/welcome.fxml"));
+            loader.setControllerFactory(springContext::getBean);
             Parent root = loader.load();
 
             stage.setTitle("CooperPay - Bem-vindo");
@@ -47,9 +55,5 @@ public class MainApp extends Application {
             springContext.close();
         }
         Platform.exit();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

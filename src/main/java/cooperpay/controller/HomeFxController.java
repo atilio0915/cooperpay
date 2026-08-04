@@ -38,7 +38,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class HomeFxController {
 
     private final LojaApiClient lojaApiClient = new LojaApiClient();
@@ -47,6 +51,9 @@ public class HomeFxController {
     private final ObservableList<MotoboyItem> motoboys = FXCollections.observableArrayList();
     private final ObservableList<PagamentoDTOResponse> rascunhos = FXCollections.observableArrayList();
     private final String semanaAtual = SemanaUtils.getSemanaAtual();
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @FXML
     private TextField txtPesquisaMotoboy;
@@ -177,7 +184,9 @@ public class HomeFxController {
     }
 
     private void trocarCena(Node source, String fxml, int largura, int altura) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource(fxml));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
+        loader.setControllerFactory(applicationContext::getBean);
+        Parent root = loader.load();
         Stage stage = (Stage) source.getScene().getWindow();
         stage.setScene(new Scene(root, largura, altura));
         stage.show();

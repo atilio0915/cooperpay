@@ -21,11 +21,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
 import javafx.stage.Stage;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MotoboyFxController {
 
     private final MotoboyApiClient apiClient = new MotoboyApiClient();
     private final ObservableList<MotoboyItem> motoboys = FXCollections.observableArrayList();
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     @FXML
     private TextField txtPesquisa;
@@ -164,7 +171,9 @@ public class MotoboyFxController {
 
     @FXML
     private void voltarHome(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/home.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/home.fxml"));
+        loader.setControllerFactory(applicationContext::getBean);
+        Parent root = loader.load();
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(new Scene(root, 1200, 600));
         stage.show();

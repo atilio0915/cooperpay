@@ -3,10 +3,11 @@ $ErrorActionPreference = "Stop"
 $ProjectRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $ProjectRoot
 
-$FxLib = "C:\Users\Pichau\Downloads\openjfx-25.0.2_windows-x64_bin-sdk\javafx-sdk-25.0.2\lib"
+# Caminho atualizado conforme sua extração do SDK 23.0.2
+$FxLib = "C:\Users\Pichau\Downloads\openjfx-23.0.2_windows-x64_bin-sdk\javafx-sdk-23.0.2\lib"
 $OutDir = "out2"
 
-$MainClass = "cooperpay.fx.MainApp"
+$MainClass = "cooperpay.fx.MainLauncher"
 
 if (-not (Test-Path $FxLib)) {
     throw "Pasta JavaFX lib nao encontrada em: $FxLib"
@@ -28,11 +29,19 @@ if ($LASTEXITCODE -ne 0) {
     throw "Falha na compilacao Maven."
 }
 
-Write-Host "Sincronizando recursos e classes compiladas..."
-Copy-Item -Path "target\classes\*" -Destination $OutDir -Recurse -Force
+Write-Host "Sincronizando bibliotecas (Spring Boot)..."
+$DependencyDir = "target\dependency"
+if (-not (Test-Path $DependencyDir)) { New-Item -ItemType Directory -Path $DependencyDir | Out-Null }
+
+.\mvnw.cmd dependency:copy-dependencies "-DoutputDirectory=$DependencyDir" -DincludeScope=runtime
+if ($LASTEXITCODE -ne 0) {
+    throw "Falha ao copiar dependencias Maven."
+}
 
 Write-Host "Executando..."
-java "-Dfile.encoding=UTF-8" "-Dsun.jnu.encoding=UTF-8" --enable-native-access=javafx.graphics --module-path $FxLib --add-modules javafx.controls,javafx.fxml -cp "$OutDir" $MainClass
+# Construindo classpath absoluto para carregar o Spring corretamente
+$FullCP = "target\classes;target\dependency\*"
+java "-Dfile.encoding=UTF-8" "-Dsun.jnu.encoding=UTF-8" --enable-native-access=ALL-UNNAMED --module-path "$FxLib" --add-modules javafx.controls,javafx.fxml -cp "$FullCP" $MainClass
 if ($LASTEXITCODE -ne 0) {
     throw "Falha ao executar MainApp."
 }

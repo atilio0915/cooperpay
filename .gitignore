@@ -14,6 +14,13 @@ buildNumber.properties
 *.class
 out2/
 
+# Arquivo local com chaves de API e comandos (Asaas/Ngrok)
+src/main/resources/comando
+
+# Arquivo de configurações com credenciais sensíveis
+src/main/resources/application.properties
+
+
 # IDEs
 .idea/
 .vscode/
