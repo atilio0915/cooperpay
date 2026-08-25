@@ -17,7 +17,7 @@ Integrado ao **Hibernate/JPA**, o sistema cria e mapeia automaticamente o banco 
 
 ## 📸 Demonstração do Sistema
 
-![Tela Principal do CooperPay](.img/img1.png)
+![Tela Principal do CooperPay](./img/img1.png)
 
 
 ## Tecnologias Utilizadas
