@@ -22,7 +22,6 @@ Integrado ao **Hibernate/JPA**, o sistema cria e mapeia automaticamente o banco 
 
 ## Tecnologias Utilizadas
 
-### **Core & Frameworks**
 * **Java 17** 
 * **Spring Boot 3.4.2** 
 * **JavaFX 21 (Controls & FXML)** 
